@@ -163,7 +163,7 @@ GRANT USAGE, SELECT, UPDATE ON SEQUENCE users_id_seq TO myuser;
 We need to be able to access this database server from other VM's as well so we have to edit the conf file
 
 ```bash
-sudo nano /var/lib/postgres/data/postgres.conf
+sudo nano /var/lib/postgres/data/postgresql.conf
 ```
 
 Look for 'listen_addresses' settings and change it to:
