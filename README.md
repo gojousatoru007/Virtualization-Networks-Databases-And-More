@@ -45,6 +45,39 @@ sudo systemctl start httpd.service
 sudo systemctl status httpd.service
 ```
 
+### Some configuration for APACHE
+```bash
+sudo vim /etc/httpd/conf/httpd.conf
+```
+Search for the module "unique_id_module" and enable it by uncommenting the line and save the file
+Reload the server
+```bash
+sudo systemctl restart httpd
+```
+this will provide unique token for each request which guarantees to be unique under all conditions.
+
+Now, we comment the "mpm_event_module" and uncomment the prefork module in
+```bash
+sudo vim /etc/httpd/conf/httpd.conf
+```
+
+also go down to the end of the file and add the following lines
+```bash
+LoadModule php_module modules/libphp.so
+AddHandler php-script php
+Include conf/extra/php_module.conf
+```
+helps the server with child processes!
+Further, we have to configure our php.ini file to enable some extensions there
+
+```bash
+sudo vim /etc/php/php.ini
+```
+search for mysqli extension and enable it by uncomment it and do the same for the gd extension!
+
+save the file and exit vim!
+
+php should be working now!
 ### Installing and Configuring a database server on VM_B21AI049_2
 
 Here we have used PostgreSQL as our database
@@ -54,6 +87,8 @@ sudo systemctl enable postgresql.service
 sudo systemctl start postgresql.service
 sudo passwd postgres
 ```
+
+
 
 further we login to the postgres user using the following command:
 
